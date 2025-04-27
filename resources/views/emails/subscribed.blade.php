@@ -1,0 +1,1 @@
+<p>You have successfully subscribed to our newsletter with {{ $email }}.</p>
