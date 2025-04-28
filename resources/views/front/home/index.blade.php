@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('content')
    <div class="mid-section">
    <div class="healthcare">
