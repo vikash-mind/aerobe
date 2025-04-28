@@ -1,10 +1,11 @@
 @extends('layouts.app')
+
 @section('content')
    <div class="mid-section">
    <div class="healthcare">
       <div class="container">
       <div class="textb">
-         <h1>{{ $homePage->banner_title }}</h1>
+         <h1>{!! $homePage->banner_title !!}</h1>
          <p>{{ $homePage->banner_desc }}</p>
          <a href="#" class="c-btn">{{ $homePage->banner_button_text }}</a>
       </div>
@@ -27,9 +28,9 @@
             @endif
          </div>
          <div class="textb">
-            <h4>{{ $homePage->section_heading }}</h4>
-            <h3>{{ $homePage->section_title }}</h3>
-            <p>{{ $homePage->section_desc }}.</p>
+            <h4>{!! $homePage->section_heading !!}</h4>
+            <h3>{!! $homePage->section_title !!}</h3>
+            <p>{!! $homePage->section_desc !!}.</p>
             <ul>
                <li>Scientific analysis and research-backed solutions</li>
                <li>Professional guidance from industry experts</li>

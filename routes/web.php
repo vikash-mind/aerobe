@@ -121,7 +121,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::resource('about-page', AboutPageController::class);
         Route::resource('cookie-preference-page', CookiePreferencePageController::class);
-        Route::resource('support-page', SupportPageController::class);
         Route::resource('privacy-policy-page', PrivacyPolicyPageController::class);
         Route::resource('terms-of-use-page', TermsOfUsePageController::class);
     });
@@ -129,5 +128,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 Route::get('/about-us', [AboutUsController::class, 'index']);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'root']);
+Route::get('set-country', [App\Http\Controllers\HomeController::class, 'setCountry']);
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
-Route::post('/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+Route::post('subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');

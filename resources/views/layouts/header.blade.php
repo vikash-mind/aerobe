@@ -30,12 +30,12 @@
     </div>
     <div class="global">
       <div class="g-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg> <span>Global</span> <i class="fa fa-angle-down" aria-hidden="true"></i></div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg> <span>{{ $countryName }}</span> <i class="fa fa-angle-down" aria-hidden="true"></i></div>
 
         <div class="global-menu">
           <ul>
             @foreach($countries as $country)
-            <li><a href="">{{ $country->label }}</a></li>
+            <li><a href="{{ url('set-country') }}?country={{$country->label}}" @if($countryName == $country->label) style="background-color: #CFCFCF" @endif>{{ $country->label }}</a></li>
             @endforeach
           </ul>
         </div>
@@ -74,23 +74,43 @@
           </div>
            @foreach($categories as $category)
           <div class="right-content {{ ($loop->first) ? 'active' : '' }}" id="{{ $category->label }}">
-            <div class="col">
-              <ul>
-               @foreach($category->ourPortfolios as $portfolio)
-                <li><a href="#" data-cat="{{ $category->label }}">{{ $portfolio->title }}</a></li>
+         @php
+           $portfolioCount = 0;
+         @endphp
+         <div class="col">
+         <ul>
+            @foreach($category->ourPortfolios as $portfolio)
+                @if($portfolioCount > 0 && $portfolioCount % 5 == 0)
+                  </ul>
+                </div>
+                <div class="col">
+                  <ul>
+                @endif
+                <li>
+                  <a href="javascript:void(0)" data-heading="{{ $portfolio->title }}" data-paragraph="{{ $portfolio->short_description }}" data-type="portfolio">
+                    {{ $portfolio->title }}
+                  </a>
+                </li>
                 <div class="img" style="display: none">
                    @if ($portfolio->image && file_exists(public_path('assets/uploads/our-portfolios/' . $portfolio->image)))
                      <img src="{{ asset('assets/uploads/our-portfolios/' . $portfolio->image) }}" title="Site Logo" />
                    @else
-                       <img src="{{ asset('assets/images/no-image.png') }}" title="Site Logo" width="150" height="120"  data-holder-rendered="true" />
+                     <img src="{{ asset('assets/images/no-image.png') }}" title="Site Logo" width="150" height="120" data-holder-rendered="true" />
                    @endif
-               </div>
-                @endforeach
+                </div>
+
+                @php
+                  $portfolioCount++;
+                @endphp
+            @endforeach
               </ul>
             </div>
-            
-            <div class="col" id="cat-{{ $category->label }}">
-               
+            <div class="col">
+               <div id="portfolio-img"></div>
+               <div class="textb">
+                  <h3></h3>
+                  <p></p>
+               </div>
             </div>
           </div>
           @endforeach
@@ -108,22 +128,43 @@
           </div>
           @foreach($categories as $category)
           <div class="right-content solution-category {{ ($loop->first) ? 'active' : '' }}" id="sol-{{ $category->label }}">
-            <div class="col">
-              <ul>
-               @foreach($category->solutions as $solution)
-                <li><a href="#" data-cat="{{ $category->label }}">{{ $solution->title }}</a></li>
-                <div class="img" style="display: none">
-                   @if ($solution->image && file_exists(public_path('assets/uploads/solutions/'.$solution->image)))
+               @php
+           $solutionCount = 0;
+         @endphp
+         <div class="col">
+         <ul>
+            @foreach($category->solutions as $solution)
+                @if($solutionCount > 0 && $solutionCount % 5 == 0)
+                  </ul>
+                </div>
+                <div class="col">
+                  <ul>
+                @endif
+                <li>
+                  <a href="javascript:void(0)" data-cat="{{ $category->label }}" data-heading="{{ $solution->title }}" data-paragraph="{{ $solution->short_description }}" data-type="solution">
+                    {{ $solution->title }}
+                  </a>
+                </li>
+                <div class="sol-img" style="display: none">
+                   @if ($solution->image && file_exists(public_path('assets/uploads/solutions/' . $solution->image)))
                      <img src="{{ asset('assets/uploads/solutions/' . $solution->image) }}" title="Site Logo" />
                    @else
-                       <img src="{{ asset('assets/images/no-image.png') }}" title="Site Logo" width="150" height="120"  data-holder-rendered="true" />
+                     <img src="{{ asset('assets/images/no-image.png') }}" title="Site Logo" width="150" height="120" data-holder-rendered="true" />
                    @endif
-               </div>
-                @endforeach
+                </div>
+
+                @php
+                  $solutionCount++;
+                @endphp
+            @endforeach
               </ul>
             </div>
-            <div class="col" id="solution-cat-{{ $category->label }}">
-               
+            <div class="col">
+               <div id="{{$category->label}}-solution-img"></div>
+               <div class="textb">
+                  <h3></h3>
+                  <p></p>
+               </div>
             </div>
           </div>
           @endforeach
