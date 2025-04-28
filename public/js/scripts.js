@@ -41,6 +41,11 @@ jQuery(document).ready(function() {
 		return false;
 	});
 
+
+
+
+
+
 	var owl = $('#hp_carousel');
 	owl.owlCarousel({
 	nav: true,
@@ -69,6 +74,10 @@ jQuery(document).ready(function() {
 		jQuery(".video_iframe iframe").attr("src", "")
 	})
 
+
+	
+
+
 jQuery(window).resize(function(){
 	var wwindow = jQuery(window).width();
 	if (wwindow >= 1200) {         
@@ -78,23 +87,12 @@ jQuery(window).resize(function(){
 	}
 });
 
+
 $(".nav-menu .dd-menu .left-menu li a").on("click", function(){
-	$(".nav-menu .dd-menu .right-content").removeClass("active");
+	$(this).closest(".left-menu").siblings(".right-content").removeClass("active");
 	var curid = $(this).attr("data-type");
-	$(curid).addClass("active");
-});
-
-$(".nav-menu .dd-menu .right-content li a").on("click", function(){
-	let category = $(this).data('cat');
-	var imgDiv = $(this).closest('li').next('.img').html();
-	$('#cat-'+category).html(imgDiv);
-});
-
-$(".nav-menu .dd-menu .solution-category li a").on("click", function(){
-	let category = $(this).data('cat');
-	var imgDiv = $(this).closest('li').next('.img').html();
-	$('#solution-cat-'+category).html(imgDiv);
-});
+	$(this).closest(".left-menu").siblings(curid).addClass("active");
+})
 
 $(".nav-menu .dd-menu .left-menu li").on("click", function(){
 	$(".nav-menu .dd-menu .left-menu li").removeClass("active");
@@ -142,4 +140,29 @@ $(document).on("click", function() {
 $(".get-in-touch").on("click", function(e) {
     e.stopPropagation();
 });
+
+$(".nav-menu .dd-menu .right-content li a").hover(
+    function() {
+      var cat = $(this).data("cat");
+      var newHeading = $(this).data("heading");
+      var newParagraph = $(this).data("paragraph");
+      if($(this).data("type") == 'portfolio') {
+        var imgDiv = $(this).closest('li').next('.img').html();
+  		} else{
+  			var imgDiv = $(this).closest('li').next('.sol-img').html();
+  		}
+      $(".nav-menu .dd-menu .right-content .col .textb h3").text(newHeading);
+      $(".nav-menu .dd-menu .right-content .col .textb p").text(newParagraph);
+      if($(this).data("type") == 'portfolio') {
+      	$('#portfolio-img').html(imgDiv);
+  	  }else{
+  	  	$('#'+cat+'-solution-img').html(imgDiv);
+  	  }
+    },
+    function() {
+      // (optional) Jab mouse hataayein tab default text wapas laana ho toh:
+      //$(".nav-menu .dd-menu .right-content .col .textb h3").text("Default Heading");
+      //$(".nav-menu .dd-menu .right-content .col .textb p").text("Default Paragraph");
+    }
+  );
 });

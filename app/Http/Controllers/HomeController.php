@@ -43,4 +43,15 @@ class HomeController extends Controller
         }
         return view('errors.404');
     }
+
+    public function setCountry(Request $request)
+    {
+        $country = $request->query('country'); // get country from URL
+        
+        if (!empty($country)) {
+            session(['country' => $country]);
+        }
+
+        return redirect()->back(); // redirect back to previous page
+    }
 }
