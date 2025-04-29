@@ -30,21 +30,15 @@
          <div class="textb">
             <h4>{!! $homePage->section_heading !!}</h4>
             <h3>{!! $homePage->section_title !!}</h3>
-            <p>{!! $homePage->section_desc !!}.</p>
-            <ul>
-               <li>Scientific analysis and research-backed solutions</li>
-               <li>Professional guidance from industry experts</li>
-               <li>State-of-the-art equipment and tools</li>
-               <li>End-to-end assistance and training</li>
-            </ul>
-            <a href="#" class="c-btn">Explore More</a>
+            <p>{!! $homePage->section_desc !!}</p>
+            <a href="{!! $homePage->section_button_link !!}" class="c-btn">Explore More</a>
          </div>
       </div>
    </div>
    <div class="portfolio">
       <div class="container">
          <div class="title">
-            <h4>Our portfolio</h4>
+            <h4>OUR PORTFOLIO</h4>
             <h3>Our Business Verticals</h3>
          </div>
          <ul>
@@ -66,7 +60,7 @@
       <div class="container">
          <div class="map"><img src="{{ asset('img/home/map/map.svg') }}" /></div>
          <div class="textb">
-            <h4>Where we located?</h4>
+            <h4>WHERE WE LOCATED?</h4>
             <h3>Our Location</h3>
             <div class="box-row">
                <div class="col">
@@ -82,7 +76,7 @@
             </div>
             <ul>
                @foreach($countries as $country)
-               <li>{{ $country->label }}</li>
+               <li>{{ \Illuminate\Support\Str::ucfirst(Str::lower($country->label)) }}</li>
                @endforeach
             </ul>
          </div>
@@ -93,7 +87,7 @@
    <div class="news-event">
       <div class="container">
          <div class="title">
-            <h4>News & Events</h4>
+            <h4>NEWS & EVENTS</h4>
             <h3>News & Events</h3>
          </div>
          <div class="column">
@@ -156,7 +150,7 @@
    <div class="testimonials">
       <div class="container">
          <div class="title">
-            <h4>Customer testimonials</h4>
+            <h4>CUSTOMER TESTIMONIALS</h4>
             <h3>What our customers say</h3>
          </div>
          <div class="column">
@@ -169,7 +163,7 @@
                        <img src="{{ asset('assets/images/no-image.png') }}" class="w-full h-full object-cover" title="Site Logo" width="150" height="120"  data-holder-rendered="true" />
                    @endif
                </div>
-               <h4>{{ $testimonial->name }}</h4>
+               <h4>{{ $testimonial->label }}</h4>
                <p>{{ $testimonial->description }}</p>
             </div>
             @endforeach
